@@ -1,0 +1,185 @@
+// стиля для страницы HOME 
+.main{
+  background: url("../../../images/tokio_noch.jpg") no-repeat center center/cover;
+  height: 80vh;
+  transition: all ease 0.4s;
+  &__title{
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    padding-top: 10%;
+    font-size: 29px;
+    h2{
+      @media (max-width:436px) {
+        font-size: 20px;
+      }
+    }
+  }
+  .container{
+    .main__arrow{
+      padding-left: 1%;
+      padding-right: 1%;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+// карточки с переворотом
+.slaider__img.manifestation-show{
+  opacity: 1;
+  animation: mani 1s ease-in-out 0s 1 normal forwards;
+}
+.slaider{
+  @media (max-width:436px) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  &__h2 {
+    color: #fff;
+    border-bottom: 1px solid #e73e58;
+    font-size: 52px;
+    display: flex;
+    justify-content: center;
+    font-weight: 100;
+    @media (max-width: 436px) {
+      font-size: 25px;
+      padding-top: 20px;
+      margin-bottom: 12px;
+    }
+  }
+  &__img {
+    opacity: 1;
+    margin: 20px 0 110px 0;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    @media (max-width: 436px) {
+      margin: 0;
+      height: 400px;
+      width: 1200px;
+      margin-bottom: 12px;
+    }
+  }
+  .card {
+    position: relative;
+    width: 17%;
+    height: 100%;
+    perspective: 1000px;
+    @media (max-width: 436px)    {
+      height: 100%;
+      border-radius: 10px;
+    }
+    .card__front, .card__back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      transition: transform 0.6s;
+      border-radius: 20px;
+      @media (max-width: 436px) {
+        border-radius: 10px;
+      }
+    }
+    .card__front {
+      background-color: transparent;
+      z-index: 2;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        @media (max-width: 436px) {
+          border-radius: 10px;
+        }
+      }
+    }
+    .card__back {
+      background-color: #222222;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .slaideer__content {
+        color: white;
+        font-size: 15px;
+        padding: 0 10px 0 10px;
+        @media (max-width:1449px) {
+          font-size: 11px;
+        }
+        @media (max-width:436px) {
+          font-size: 11px;
+        }
+        .span__slaider{
+          font-weight: 900;
+        }
+      }
+    }
+    &:hover .card__front {
+      transform: rotateY(180deg);
+    }
+    &:hover .card__back {
+      transform: rotateY(0deg);
+    }
+  }
+}
+.container2.manifestation-show{
+  opacity: 1;
+  animation: mani 1s ease-in-out 0s 1 normal forwards;
+}
+.container2{
+  color: #fff;
+  margin: 0 14% 5% 14%;
+  background-color: #222222;
+  border-radius: 2%;
+  @media (max-width:436px) {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+  }
+
+}
+.block__title{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e73e58;
+  margin-bottom: 5%;
+  &__h3{
+    font-size: 29px;
+  }
+}
+.block__card{
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+  padding-bottom: 5%;
+  @media (max-width:436px) {
+    display: inline;
+  }
+  // =======КАРТА======
+  &-ymaps{
+    width:560px;
+    height:445px;
+    @media (max-width:436px) {
+      margin: 0 6% 0 6%;
+      width: 354px;
+    }
+    @media (max-width:376px) {
+      margin: 0 1% 0 1%;
+      width: 354px;
+    }
+  }
+  &__p{
+    max-width: 36%;
+    text-align: center;
+    font-size: 27px;
+    @media (max-width:436px) {
+      font-size: 15px;
+      text-transform: none;
+      max-width: 99%;
+    }
+  }
+}
