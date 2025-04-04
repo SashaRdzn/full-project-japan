@@ -4,7 +4,7 @@ import useCardData from "../../components/pages/CardDetails/UserCardData";
 import ImageGallery from "../../components/pages/CardDetails/ImageGallery";
 import Modal from "../../components/pages/CardDetails/Modal";
 import Comments from "../../components/pages/CardDetails/Comments";
-import "./CardDetails.css";
+import styles from './styles.module.scss'
 import LoaderDetail from "../../components/Loader/LoaderDetail";
 
 const CardDetails = () => {
@@ -43,8 +43,8 @@ const CardDetails = () => {
 
   return (
     <>
-      <div className="back">
-        <Link to="/catalog" className="back__link link">
+      <div className={styles.back}>
+        <Link to="/catalog" className={`${styles.back__link} ${styles.link}`}>
           ❮ Назад
         </Link>
       </div>
@@ -58,17 +58,17 @@ const CardDetails = () => {
         onThumbnailClick={handleThumbnailClick}
       />
       <ImageGallery images={images} onThumbnailClick={handleThumbnailClick} />
-      <div className="block">
-        <div className="block__text">
-          <div className="block__text__title">
+      <div className={styles.block}>
+        <div className={styles.block__text}>
+          <div className={styles.block__text__title}>
             <h3>{cardData.title}</h3>
           </div>
-          <div className="block__text__text">
-            <p className="block__text-p">{cardData.detail}</p>
+          <div className={styles.block__text__text}>
+            <p className={styles.block__text}>{cardData.detail}</p>
           </div>
         </div>
       </div>
-      <div className="coments">
+      <div className={styles.coments}>
         <h1>Комментарии</h1>
       </div>
       <Comments cardId={id} />
