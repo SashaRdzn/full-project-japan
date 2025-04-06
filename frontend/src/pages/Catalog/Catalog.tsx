@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import Search from "../../components/pages/Catalog/Search";
-import CreateCard from "../../components/pages/Catalog/CreateCard";
-import Filter from "../../components/pages/Catalog/Filter";
-import Sorting from "../../components/pages/Catalog/Sorting";
-import InfinityScroll from "../../components/pages/Catalog/InfinityScroll";
+import Search from "./ui/Search";
+import CreateCard from "./ui/Card/CreateCard";
+import Filter from "./ui/Filter";
+import Sorting from "./ui/Sorting";
+import InfinityScroll from "./ui/InfinityScroll";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 

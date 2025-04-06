@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useCardData from "../../components/pages/CardDetails/UserCardData";
-import ImageGallery from "../../components/pages/CardDetails/ImageGallery";
-import Modal from "../../components/pages/CardDetails/Modal";
-import Comments from "../../components/pages/CardDetails/Comments";
+import useCardData from "./hooks/UserCardData";
+import ImageGallery from "./ui/ImageGallery/ImageGallery";
+import Modal from "./ui/Modal/Modal";
+import Comments from "./ui/Comments/Comments";
 import styles from './styles.module.scss'
 import LoaderDetail from "../../components/Loader/LoaderDetail";
 

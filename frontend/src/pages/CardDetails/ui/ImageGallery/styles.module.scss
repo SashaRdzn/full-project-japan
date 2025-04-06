@@ -1,0 +1,51 @@
+.openImg {
+    display: flex;
+    gap: 1%;
+    margin-top: 2%;
+    justify-content: space-around;
+}
+
+.bigImage {
+    border-radius: 15px;
+    width: 25%;
+    display: flex;
+
+    @media (max-width: 1025px) {
+        width: 25%;
+
+    }
+
+    @media (max-width: 426px) {
+        width: 25%;
+
+    }
+
+    @media (max-width: 376px) {
+        width: 25%;
+
+    }
+
+}
+.thumbnail {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+
+    @media (max-width: 1025px) {}
+
+    @media (max-width: 525px) {
+        width: 70px;
+        height: 50px;
+
+    }
+
+    @media (max-width: 376px) {
+        width: 70px;
+        height: 50px;
+
+
+    }
+}
+
