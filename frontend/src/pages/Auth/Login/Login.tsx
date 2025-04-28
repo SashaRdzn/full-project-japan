@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import styles from "../../../core/Space/styles.module.scss";
 import { renderInput } from "../../../components/CustomUI/InputForForm";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate()
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
@@ -31,14 +32,15 @@ const Login = () => {
       const result = await response.json();
       localStorage.setItem("refresh", result.refresh);
       localStorage.setItem("access", result.access);
-      toast.success(`Приветсвуем ${result.user.username}`, {
+      toast.success(`Приветсвуем вас ${result.user.username}`, {
         style: {
           padding: "16px",
           color: "white",
-          background: "rgba(77, 234, 10, 0.5)",
+          background: "rgba(45, 2, 217, 0.5)",
         },
-        icon: "👏",
+        icon: "👽",
       });
+      navigate('/catalog')
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -46,7 +48,6 @@ const Login = () => {
 
   return (
     <div>
-      <Toaster position="top-right" reverseOrder={false} />
       <div className={styles.authSection}>
         <h2>Авторизация</h2>
         <div className={styles.authForms}>
