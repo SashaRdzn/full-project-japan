@@ -25,7 +25,8 @@
     "src/**/*.js",
     "src/**/*.jsx",
     "src/**/*",
-    "global.d.ts"
+    "vite-env.d.ts",
+    "global.d.ts",
   ],
   "exclude": ["node_modules"]
 }

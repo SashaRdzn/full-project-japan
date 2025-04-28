@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import Search from "./ui/Search";
-import CreateCard from "./ui/Card/CreateCard";
+import CreateCard from "./ui/CreateCard";
 import Filter from "./ui/Filter";
 import Sorting from "./ui/Sorting";
-import InfinityScroll from "./ui/InfinityScroll";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +14,8 @@ const Catalog = () => {
   const [sortBy, setSortBy] = useState("default");
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const urlMoc = "https://672a07666d5fa4901b6f7076.mockapi.io/card/";
+  const url = import.meta.env.VITE_SERVER_BASE_URL
+  const urlMoc = `${url}api/catalog/cards/`;
   const navigate = useNavigate();
   const loader = document.getElementById("infinity__scroll");
 
@@ -26,8 +26,6 @@ const Catalog = () => {
         loader.style.display = "flex";
       }
       const url = new URL(urlMoc);
-      url.searchParams.append("page", page);
-      url.searchParams.append("limit", 10);
       if (searchQuery) url.searchParams.append("title", searchQuery);
       if (filters.category)
         url.searchParams.append("category", filters.category);
@@ -40,8 +38,6 @@ const Catalog = () => {
       }
       try {
         const response = await fetch(url);
-        console.log("43");
-
         if (!response.ok) throw new Error("Ошибка загрузки");
         const newData = await response.json();
 
@@ -60,21 +56,6 @@ const Catalog = () => {
     };
     fetchData();
   }, [page, filters, searchQuery, sortBy, loader]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight - 100 &&
-        !isLoading &&
-        hasMore
-      ) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLoading, hasMore]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -106,8 +87,11 @@ const Catalog = () => {
       </div>
       <div className={styles.catalog}>
         <div className={styles.catalog__card} id="catalog__card">
-          <CreateCard key={data.id} data={data} onCardClick={handleCardClick} />
-          <InfinityScroll />
+          {data.map((card) => (
+            <div key={card.id}>
+              <CreateCard data={card} onCardClick={handleCardClick} />
+            </div>
+          ))}
         </div>
       </div>
     </>

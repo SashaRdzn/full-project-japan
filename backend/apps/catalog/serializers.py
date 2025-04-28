@@ -1,47 +1,69 @@
-from rest_framework.serializers import ModelSerializer
-from .models import Card, Category, Image
 from rest_framework import serializers
-
-class ImageSerializer(ModelSerializer):
-    class Meta:
-        model = Image
-        fields = ["id", "title", "images"]
+from .models import Category, Card, CardImage
 
 
-class CategorySerializer(ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "title"]
 
 
-class CardSerializer(ModelSerializer):
-    category = CategorySerializer(many=True, read_only=True)
-    images = ImageSerializer(many=True, read_only=True)
+class CardImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CardImage
+        fields = ["id", "image", "order", "is_main"]
+
+
+class CardSerializer(serializers.ModelSerializer):
+    images = CardImageSerializer(many=True, read_only=True)
+    categories = CategorySerializer(source="category", many=True, read_only=True)
     category_ids = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=Category.objects.all(),
-        source='category',
-        write_only=True,
-        required=False
+        many=True, queryset=Category.objects.all(), source="category", write_only=True
     )
 
-    image_ids = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=Image.objects.all(),
-        source='images',
-        write_only=True,
-        required=False
-    )
     class Meta:
         model = Card
         fields = [
             "id",
             "title",
-            "category",
-            "images",
             "text",
             "address",
+            "count",
             "maps",
-            "image_ids",
+            "categories",
             "category_ids",
+            "images",
         ]
+
+    def create(self, validated_data):
+        images_data = validated_data.pop("images", [])
+        categories = validated_data.pop("category", [])
+
+        card = Card.objects.create(**validated_data)
+        card.category.set(categories)
+
+        for image_data in images_data:
+            CardImage.objects.create(card=card, **image_data)
+
+        return card
+
+    def update(self, instance, validated_data):
+        images_data = validated_data.pop("images", None)
+        categories = validated_data.pop("category", None)
+
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if categories is not None:
+            instance.category.set(categories)
+
+        instance.save()
+
+
+        if images_data is not None:
+            instance.images.all().delete()
+            for image_data in images_data:
+                CardImage.objects.create(card=instance, **image_data)
+
+        return instance

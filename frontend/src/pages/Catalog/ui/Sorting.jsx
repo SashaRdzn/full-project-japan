@@ -1,13 +1,7 @@
 import PropTypes from "prop-types";
 import "../../../pages/Catalog/Catalog.css";
-
+import { sortOptions } from "../../../shared/constants/constants";
 const Sorting = ({ onSort }) => {
-  const sortOptions = [
-    { value: "count&order=desc", label: "Популярное" },
-    { value: "count&order=ask", label: "Не популярное" },
-    { value: "default", label: "По умолчанию" },
-  ];
-
   return (
     <div className="filter filter-2" id="filter-2">
       <button className="drop drop-2" id="drop-2">
@@ -29,8 +23,7 @@ const Sorting = ({ onSort }) => {
                     el.classList.remove("checked");
                   });
                 e.target.classList.add("checked");
-              }}
-            >
+              }}>
               {option.label}
             </a>
           ))}
