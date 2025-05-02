@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Category, Image, Card
+from .models import Category, CardImage, Card
 
 admin.site.register(Category)
-admin.site.register(Image)
+admin.site.register(CardImage)
 admin.site.register(Card)
