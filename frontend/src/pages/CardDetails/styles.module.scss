@@ -1,0 +1,48 @@
+.back {
+  margin: 1% 0 0 4%;
+}
+
+.block {
+  margin-top: 2%;
+
+  &__text {
+    &-p {
+      font-size: 20px;
+
+      @media (max-width:426px) {
+        font-size: 13px;
+      }
+
+      @media (max-width:376px) {
+        font-size: 15px;
+      }
+    }
+
+    color: #bdbdbd;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+
+    @media (max-width:426px) {
+      text-overflow: clip;
+    }
+
+    @media (max-width:376px) {
+      text-overflow: clip;
+    }
+
+    &__title {
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      color: #fff;
+    }
+  }
+}
+
+.coments {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
